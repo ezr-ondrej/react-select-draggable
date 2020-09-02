@@ -1,1 +1,1 @@
-export OrderableSelect from './OrderableSelect';
+export { default } from "./OrderableSelect";
