@@ -5,7 +5,6 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
-    library: 'OrderableSelect',
     libraryTarget: 'commonjs2',
   },
   module: {
