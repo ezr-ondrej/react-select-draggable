@@ -1,7 +1,7 @@
-import React, { useImperativeHandle, useRef } from 'react';
-import { DragSource, DropTarget } from 'react-dnd';
-import PropTypes from 'prop-types';
-import { set } from 'lodash';
+import React, { useImperativeHandle, useRef } from "react";
+import { DragSource, DropTarget } from "react-dnd";
+import PropTypes from "prop-types";
+import { set } from "lodash";
 
 export const orderDragged = (inputArray, dragIndex, hoverIndex) => {
   const dragedValue = inputArray[dragIndex];
@@ -55,7 +55,7 @@ const getDropTarget = (dropTypes, getIndex, getMoveFnc) =>
   DropTarget(
     dropTypes,
     { hover: makeOnHover(getIndex, getMoveFnc) },
-    connect => ({
+    (connect) => ({
       connectDropTarget: connect.dropTarget(),
     })
   );
@@ -64,7 +64,7 @@ const getDragSource = (dragType, getIndex, getItem) =>
   DragSource(
     dragType,
     {
-      beginDrag: props => set(getItem(props), 'index', getIndex(props)),
+      beginDrag: (props) => set(getItem(props), "index", getIndex(props)),
     },
     (connect, monitor) => ({
       connectDragSource: connect.dragSource(),
@@ -75,10 +75,10 @@ const getDragSource = (dragType, getIndex, getItem) =>
 export const orderable = (
   Component,
   {
-    type = 'orderable',
-    getItem = props => ({ id: props.id }),
-    getIndex = props => props.index,
-    getMoveFnc = props => props.moveValue,
+    type = "orderable",
+    getItem = (props) => ({ id: props.id }),
+    getIndex = (props) => props.index,
+    getMoveFnc = (props) => props.moveValue,
   }
 ) => {
   const Orderable = React.forwardRef(
@@ -105,9 +105,9 @@ export const orderable = (
       );
     }
   );
-  Orderable.displayName = `Orderable(${Component.displayName ||
-    Component.name ||
-    'Component'})`;
+  Orderable.displayName = `Orderable(${
+    Component.displayName || Component.name || "Component"
+  })`;
 
   Orderable.propTypes = {
     isDragging: PropTypes.bool.isRequired,
