@@ -1,3 +1,3 @@
-export { default } from "./OrderableSelect";
-
 export * from 'react-select';
+
+export { default } from "./OrderableSelect";
