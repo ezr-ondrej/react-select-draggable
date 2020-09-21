@@ -1,54 +1,63 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import Select from 'react-select';
-import { set } from 'lodash';
+import React from "react";
+import PropTypes from "prop-types";
+import Select from "react-select";
+import HTML5Backend from "react-dnd-html5-backend";
+import { DndProvider } from "react-dnd";
+import { set, map } from "lodash";
 
-import { orderDragged } from './helpers';
-import OrderableMultiValue from './components/OrderableMultiValue';
+import { orderDragged } from "./helpers";
+import OrderableMultiValue from "./components/OrderableMultiValue";
 
 const OrderableSelect = ({
   onChange,
-  defaultValue,
+  // defaultValue,
   value,
   options,
   ...props
 }) => {
-  const [internalValue, setInternalValue] = useState(
-    value.map(v => options.find(opt => opt.value === v)).filter(v => !!v)
+  const internalValue = map(value, (v) => options.find((opt) => opt.value === v.value)).filter(
+    (v) => !!v
   );
   const moveDraggedOption = (dragIndex, hoverIndex) => {
-    setInternalValue(orderDragged(internalValue, dragIndex, hoverIndex));
+    const oderDraggedInternalValue = orderDragged(
+      internalValue,
+      dragIndex,
+      hoverIndex
+    );
+
+    onChange(oderDraggedInternalValue);
   };
 
   return (
-    <Select
-      components={{ MultiValue: OrderableMultiValue }}
-      isMulti
-      moveDraggedOption={moveDraggedOption}
-      styles={{
-        multiValue: (styles, { isDragging }) => ({
-          ...styles,
-          opacity: isDragging ? 0.5 : null,
-        }),
-      }}
-      {...props}
-      options={options}
-      value={internalValue.map((o, i) => set(o, 'index', i))}
-      onChange={(newValue, actionMeta) => {
-        setInternalValue(newValue);
-        onChange(newValue, actionMeta);
-      }}
-    />
+    <DndProvider backend={HTML5Backend}>
+      <Select
+        components={{ MultiValue: OrderableMultiValue }}
+        isMulti
+        moveDraggedOption={moveDraggedOption}
+        styles={{
+          multiValue: (styles, { isDragging }) => ({
+            ...styles,
+            opacity: isDragging ? 0.5 : null,
+          }),
+        }}
+        options={options}
+        value={map(internalValue, (o, i) => set(o, "index", i))}
+        onChange={(newValue, actionMeta) => {
+          onChange(newValue, actionMeta);
+        }}
+        {...props}
+      />
+    </DndProvider>
   );
 };
 OrderableSelect.propTypes = {
   onChange: PropTypes.func,
-  defaultValue: PropTypes.array,
+  // defaultValue: PropTypes.array,
   value: PropTypes.array,
 };
 OrderableSelect.defaultProps = {
   onChange: () => {},
-  defaultValue: null,
+  // defaultValue: null,
   value: null,
 };
 
