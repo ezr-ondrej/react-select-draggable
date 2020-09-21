@@ -1,6 +1,6 @@
 {
   "name": "react-select-draggable",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Add orderable options feature to react-select",
   "main": "dist/main.js",
   "files": [
@@ -12,8 +12,8 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "prop-types": "^15.7.2",
     "lodash": "^4.17.20",
+    "prop-types": "^15.7.2",
     "react-dnd": "^10.0.0",
     "react-dnd-html5-backend": "^10.0.0",
     "react-select": "^3.0.0"
@@ -50,7 +50,16 @@
     "type": "git",
     "url": "git+https://github.com/ezr-ondrej/react-select-draggable.git"
   },
-  "keywords": ["sortable", "draggable", "react", "react-dnd", "react-select"],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "keywords": [
+    "sortable",
+    "draggable",
+    "react",
+    "react-dnd",
+    "react-select"
+  ],
   "author": "Ondrej Ezr",
   "license": "GPL-3.0-or-later",
   "bugs": {
