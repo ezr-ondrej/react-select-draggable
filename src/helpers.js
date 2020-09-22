@@ -1,7 +1,7 @@
 import React, { useImperativeHandle, useRef } from "react";
 import { DragSource, DropTarget } from "react-dnd";
 import PropTypes from "prop-types";
-import { set } from "lodash";
+import { set } from "lodash-es";
 
 export const orderDragged = (inputArray, dragIndex, hoverIndex) => {
   const dragedValue = inputArray[dragIndex];
