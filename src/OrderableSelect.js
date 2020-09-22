@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Select from "react-select";
 import HTML5Backend from "react-dnd-html5-backend";
 import { DndProvider } from "react-dnd";
-import { set, map } from "lodash";
+import { set, map } from "lodash-es";
 
 import { orderDragged } from "./helpers";
 import OrderableMultiValue from "./components/OrderableMultiValue";
